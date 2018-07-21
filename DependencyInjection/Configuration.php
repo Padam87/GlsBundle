@@ -2,7 +2,6 @@
 
 namespace Padam87\GlsBundle\DependencyInjection;
 
-use Padam87\GlsBundle\Service\ParcelApi;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -23,7 +22,6 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('class')->defaultValue(ParcelApi::class)->end()
                 ->scalarNode('parcel_wsdl')
                     ->defaultValue('https://online.gls-hungary.com/webservices/soap_server.php?wsdl')
                 ->end()
