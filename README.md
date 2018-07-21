@@ -27,12 +27,14 @@ padam87_gls:
 
 ```yaml
 padam87_gls:
-    wsdl: 'https://online.gls-hungary.com/webservices/soap_server.php?wsdl&ver=16.12.15.01'
-    tracking_url: 'https://gls-group.eu/app/service/open/rest/HU/en/rstt001?match=%1$s'
-    config:
-        username: '100019805'
-        password: '100019805'
-        senderid: '100019805'
+    parcel_wsdl:          'https://online.gls-hungary.com/webservices/soap_server.php?wsdl'
+    tracking_url:         'https://gls-group.eu/app/service/open/rest/HU/en/rstt001?match={code}'
+    pod_download_url:     'http://online.gls-hungary.com/tt_getPodsClass.php?userID={userid}&senderID={senderid}&pclFrom={code_from}&pclTo={code_to}&lang=hu&directDownload=1&fileType=PDF'
+    config:               # Required
+        userid:               ~ # Required, Example: required for pod download, GLS usually forgets to provide it unless you ask
+        username:             ~ # Required
+        password:             ~ # Required
+        senderid:             ~ # Required
         sender_name: 'x'
         sender_address: 'x'
         sender_city: 'x'
