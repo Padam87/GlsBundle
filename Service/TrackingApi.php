@@ -26,7 +26,7 @@ class TrackingApi
 
     public function getParcelInformation($number, $multiple = false)
     {
-        $url = sprintf($this->config['tracking_url'], implode(',', $number));
+        $url = str_replace('{code}', implode(',', $number), $this->config['tracking_url']);
 
         try {
             $request = $this->messageFactory->createRequest('GET', $url);

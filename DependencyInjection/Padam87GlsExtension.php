@@ -30,5 +30,8 @@ class Padam87GlsExtension extends Extension
 
         $definition = $container->getDefinition('padam87_gls.tracking_api');
         $definition->addMethodCall('setConfig', [$config]);
+
+        $definition = $container->getDefinition('padam87_gls.pod_download_api');
+        $definition->addMethodCall('setConfig', [$config]);
     }
 }

@@ -7,3 +7,7 @@ services:
         public: true
         autowire: true
         class: Padam87\GlsBundle\Service\TrackingApi
+    padam87_gls.pod_download_api:
+        public: true
+        autowire: true
+        class: Padam87\GlsBundle\Service\PodDownloadApi
