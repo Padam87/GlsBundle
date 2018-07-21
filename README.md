@@ -93,3 +93,14 @@ $provider->getParcelInformation('00,01', true)
 ```
 
 The returned value will be an array, with the individual tracking codes as keys.
+
+#### POD download
+
+```php
+$api = $this->get('padam87_gls.pod_download_api');
+$pdf = $api->downloadPod($trackingCode);
+
+if (null !== $pdf) {
+    // file_put_contents($path, $pdf);
+}
+```
