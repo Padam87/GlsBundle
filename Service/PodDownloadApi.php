@@ -33,7 +33,7 @@ class PodDownloadApi
 
         $url = str_replace(
             [
-                '{username}',
+                '{userid}',
                 '{senderid}',
                 '{code_from}',
                 '{code_to}',
@@ -56,13 +56,17 @@ class PodDownloadApi
 
         $body = (string) $response->getBody();
 
+        if (empty($body)) {
+            return null;
+        }
+
         $fileLocation = str_replace(
             [
                 '<script>self.document.location="',
                 '";</script>'
             ],
             '',
-            (string) $response->getBody()
+            $body
         );
 
         $urlParts = parse_url($url);
