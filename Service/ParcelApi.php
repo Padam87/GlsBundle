@@ -15,7 +15,7 @@ class ParcelApi
 
     public function getClient(): \SoapClient
     {
-        return new \SoapClient($this->config['wsdl']);
+        return new \SoapClient($this->config['parcel_wsdl']);
     }
 
     public function createParcel($data): array
