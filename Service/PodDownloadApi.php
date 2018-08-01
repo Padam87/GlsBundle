@@ -73,12 +73,22 @@ class PodDownloadApi
 
         $fileUrl = sprintf("%s://%s/%s", $urlParts['scheme'], $urlParts['host'], $fileLocation);
 
-        try {
-            $request = $this->messageFactory->createRequest('GET', $fileUrl);
-            $response = $this->client->sendRequest($request);
-        } catch (Exception $e) {
-            return null;
-        }
+        $retries = 5;
+
+        do {
+            try {
+                $request = $this->messageFactory->createRequest('GET', $fileUrl);
+                $response = $this->client->sendRequest($request);
+            } catch (Exception $e) {
+                return null;
+            }
+
+            $retries--;
+
+            if ($response->getStatusCode() != 200) {
+                usleep(25);
+            }
+        } while ($retries > 0 && $response->getStatusCode() != 200);
 
         if ($response->getStatusCode() != 200) {
             return null;
