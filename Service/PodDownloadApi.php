@@ -73,7 +73,7 @@ class PodDownloadApi
 
         $fileUrl = sprintf("%s://%s/%s", $urlParts['scheme'], $urlParts['host'], $fileLocation);
 
-        $retries = 5;
+        $retries = 10;
 
         do {
             try {
@@ -86,7 +86,7 @@ class PodDownloadApi
             $retries--;
 
             if ($response->getStatusCode() != 200) {
-                usleep(25);
+                usleep(250);
             }
         } while ($retries > 0 && $response->getStatusCode() != 200);
 
