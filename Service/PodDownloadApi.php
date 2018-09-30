@@ -90,7 +90,12 @@ class PodDownloadApi
             }
         } while ($retries > 0 && $response->getStatusCode() != 200);
 
-        if ($response->getStatusCode() != 200) {
+        $body = (string) $response->getBody();
+
+        $finfo = new \finfo(FILEINFO_MIME_TYPE);
+        $mime = $finfo->buffer((string) $response->getBody());
+
+        if ($response->getStatusCode() != 200 || $mime != 'application/pdf') {
             return null;
         }
 
