@@ -1,13 +1,17 @@
 services:
+    Padam87\GlsBundle\Service\ParcelApi:
+        autowire: true
+    Padam87\GlsBundle\Service\TrackingApi:
+        autowire: true
+    Padam87\GlsBundle\Service\PodDownloadApi:
+        autowire: true
+
     padam87_gls.parcel_api:
         public: true
-        autowire: true
-        class: Padam87\GlsBundle\Service\ParcelApi
+        alias: Padam87\GlsBundle\Service\ParcelApi
     padam87_gls.tracking_api:
         public: true
-        autowire: true
-        class: Padam87\GlsBundle\Service\TrackingApi
+        alias: Padam87\GlsBundle\Service\TrackingApi
     padam87_gls.pod_download_api:
         public: true
-        autowire: true
-        class: Padam87\GlsBundle\Service\PodDownloadApi
+        alias: Padam87\GlsBundle\Service\PodDownloadApi
