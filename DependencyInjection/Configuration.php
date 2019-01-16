@@ -40,7 +40,6 @@ class Configuration implements ConfigurationInterface
                     ->end()
                     ->ignoreExtraKeys(false)
                     ->isRequired()
-                    ->cannotBeEmpty()
                 ->end()
             ->end()
         ;
