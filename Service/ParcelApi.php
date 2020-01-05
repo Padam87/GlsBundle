@@ -2,124 +2,89 @@
 
 namespace Padam87\GlsBundle\Service;
 
+use Padam87\GlsBundle\Dto\Request\AbstractRequest;
+use Padam87\GlsBundle\Dto\Request\PrintLabelsRequest;
+use Padam87\GlsBundle\Dto\Response\PrintLabelsResponse;
+use Padam87\GlsBundle\Model\Address;
+use Padam87\GlsBundle\Model\Collection;
+use Padam87\GlsBundle\Model\ErrorInfo;
+use Padam87\GlsBundle\Model\Parcel;
+use Padam87\GlsBundle\Model\ParcelInfo;
+use Padam87\GlsBundle\Model\PrintLabelsInfo;
+use Padam87\GlsBundle\Model\Service;
+use Symfony\Component\HttpClient\CurlHttpClient;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ParcelApi
 {
     private $config = [];
+    private $client;
 
     public function setConfig(array $config)
     {
         $this->config = $config;
     }
 
-    public function getClient(): \SoapClient
+    public function __construct()
     {
-        return new \SoapClient($this->config['parcel_wsdl']);
     }
 
-    public function createParcel($data): array
+    public function getClient()
     {
-        $data = $this->resolveData($data);
+        if ($this->client === null) {
+            $this->client = new \SoapClient(
+                $this->config['parcel_wsdl'],
+                [
+                    'trace' => 1,
+                    'classmap' => [
+                        // Generics can't come soon enough.
+                        'ArrayOfstring' => Collection::class,
+                        'ArrayOfint' => Collection::class,
+                        'ArrayOfParcel' => Collection::class,
+                        'ArrayOfService' => Collection::class,
+                        'ArrayOfParcelInfo' => Collection::class,
+                        'ArrayOfPrintDataInfo' => Collection::class,
+                        'ArrayOfSuccessfullyDeleted' => Collection::class,
+                        'ArrayOfErrorInfo' => Collection::class,
+                        'ArrayOfPrintLabelsInfo' => Collection::class,
 
-        return (array) $this->getClient()->__soapCall('printlabel', $data);
+                        'Address' => Address::class,
+                        'Parcel' => Parcel::class,
+                        'Service' => Service::class,
+
+                        'ErrorInfo' => ErrorInfo::class,
+                        'ParcelInfo' => ParcelInfo::class,
+                        'PrintLabelsInfo' => PrintLabelsInfo::class,
+
+                        'PrintLabelsResponse' => PrintLabelsResponse::class,
+                        'PrintLabelsRequest' => PrintLabelsRequest::class,
+                    ]
+                ]
+            );
+        }
+
+        return $this->client;
     }
 
-    /**
-     * @param array $data
-     *
-     * @return array
-     */
-    protected function resolveData(array $data)
+    protected function prepareRequest(AbstractRequest $request)
     {
-        $resolver = new OptionsResolver();
-
-        $resolver
-            ->setRequired(
-                [
-                    'username',
-                    'password',
-                    'senderid',
-                    'sender_name',
-                    'sender_address',
-                    'sender_city',
-                    'sender_zipcode',
-                    'sender_country',
-                    'consig_name',
-                    'consig_address',
-                    'consig_city',
-                    'consig_zipcode',
-                    'consig_country',
-                    'pcount',
-                    'pickupdate',
-                    'printertemplate',
-                    'printit',
-                    'timestamp',
-                ]
-            )
-            ->setDefaults(
-                [
-                    'sender_contact' => '',
-                    'sender_phone' => '',
-                    'sender_email' => '',
-                    'consig_contact' => '',
-                    'consig_phone' => '',
-                    'consig_email' => '',
-                    'content' => '',
-                    'clientref' => '',
-                    'codamount' => 0.0,
-                    'codref' => '',
-                    'services' => '',
-                    'timestamp' => date('YmdHis'),
-                    'hash' => '',
-                    'customlabel' => '',
-                    'is_autoprint_pdfs' => false,
-                ]
-            )
-            ->setDefaults($this->config['config'])
+        $request
+            ->setUsername($this->config['config']['username'])
+            ->setPassword(hash('sha512', $this->config['config']['password'], true))
         ;
-
-        $order = [
-            'username', 'password', 'senderid',
-            'sender_name', 'sender_address', 'sender_city', 'sender_zipcode', 'sender_country',
-            'sender_contact', 'sender_phone', 'sender_email',
-            'consig_name', 'consig_address', 'consig_city', 'consig_zipcode', 'consig_country',
-            'consig_contact', 'consig_phone', 'consig_email',
-            'pcount', 'pickupdate', 'content', 'clientref', 'codamount', 'codref',
-            'services', 'printertemplate', 'printit', 'timestamp', 'hash', 'customlabel', 'is_autoprint_pdfs',
-        ];
-
-        $data = $resolver->resolve($data);
-        $return = [];
-
-        foreach ($order as $field) {
-            $return[$field] = $data[$field];
-        }
-
-        $return['hash'] = $this->hash($return);
-
-        return $return;
     }
 
-    /**
-     * @param $data
-     *
-     * @return string
-     */
-    protected function hash($data)
+    public function printLabels(PrintLabelsRequest $request): PrintLabelsResponse
     {
-        $excluded = ['services', 'printertemplate', 'printit', 'timestamp', 'hash', 'customlabel', 'is_autoprint_pdfs'];
+        $this->prepareRequest($request);
 
-        $hashBase = '';
+        $request->getParcelList()->forAll(function ($key, Parcel $parcel) {
+            $parcel->setClientNumber($this->config['config']['senderid']);
+        });
 
-        foreach ($data as $field => $value) {
-            if (in_array($field, $excluded)) {
-                continue;
-            }
+        $response = $this->getClient()->PrintLabels(['printLabelsRequest' => $request]);
 
-            $hashBase .= $data[$field];
-        }
-
-        return sha1($hashBase);
+        return $response->PrintLabelsResult;
     }
 }
