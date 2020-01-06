@@ -3,7 +3,11 @@
 namespace Padam87\GlsBundle\Service;
 
 use Padam87\GlsBundle\Dto\Request\AbstractRequest;
+use Padam87\GlsBundle\Dto\Request\GetPrintedLabelsRequest;
+use Padam87\GlsBundle\Dto\Request\PrepareLabelsRequest;
 use Padam87\GlsBundle\Dto\Request\PrintLabelsRequest;
+use Padam87\GlsBundle\Dto\Response\GetPrintedLabelsResponse;
+use Padam87\GlsBundle\Dto\Response\PrepareLabelsResponse;
 use Padam87\GlsBundle\Dto\Response\PrintLabelsResponse;
 use Padam87\GlsBundle\Model\Address;
 use Padam87\GlsBundle\Model\Collection;
@@ -37,6 +41,7 @@ class ParcelApi
                 $this->config['parcel_wsdl'],
                 [
                     'trace' => 1,
+                    'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
                     'classmap' => [
                         // Generics can't come soon enough.
                         'ArrayOfstring' => Collection::class,
@@ -57,8 +62,14 @@ class ParcelApi
                         'ParcelInfo' => ParcelInfo::class,
                         'PrintLabelsInfo' => PrintLabelsInfo::class,
 
-                        'PrintLabelsResponse' => PrintLabelsResponse::class,
                         'PrintLabelsRequest' => PrintLabelsRequest::class,
+                        'PrintLabelsResponse' => PrintLabelsResponse::class,
+
+                        'PrepareLabelsRequest' => PrepareLabelsRequest::class,
+                        'PrepareLabelsResponse' => PrepareLabelsResponse::class,
+
+                        'GetPrintedLabelsRequest' => GetPrintedLabelsRequest::class,
+                        'GetPrintedLabelsResponse' => GetPrintedLabelsResponse::class,
                     ]
                 ]
             );
@@ -73,6 +84,28 @@ class ParcelApi
             ->setUsername($this->config['config']['username'])
             ->setPassword(hash('sha512', $this->config['config']['password'], true))
         ;
+    }
+
+    public function prepareLabels(PrepareLabelsRequest $request): PrepareLabelsResponse
+    {
+        $this->prepareRequest($request);
+
+        $request->getParcelList()->forAll(function ($key, Parcel $parcel) {
+            $parcel->setClientNumber($this->config['config']['senderid']);
+        });
+
+        $response = $this->getClient()->PrepareLabels(['prepareLabelsRequest' => $request]);
+
+        return $response->PrepareLabelsResult;
+    }
+
+    public function getPrintedLabels(GetPrintedLabelsRequest $request): GetPrintedLabelsResponse
+    {
+        $this->prepareRequest($request);
+
+        $response = $this->getClient()->GetPrintedLabels(['getPrintedLabelsRequest' => $request]);
+
+        return $response->GetPrintedLabelsResult;
     }
 
     public function printLabels(PrintLabelsRequest $request): PrintLabelsResponse
