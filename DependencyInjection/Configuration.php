@@ -17,10 +17,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('padam87_gls');
+        $treeBuilder = new TreeBuilder('padam87_gls');
 
-        $rootNode
+        $treeBuilder->getRootNode()
             ->children()
                 ->scalarNode('parcel_wsdl')
                     ->defaultValue('https://api.mygls.hu/ParcelService.svc?singleWsdl')
