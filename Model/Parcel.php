@@ -14,7 +14,7 @@ class Parcel
      *
      * @var integer
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"BeforeSubmit"})
      */
     public $clientNumber;
 
@@ -239,6 +239,18 @@ class Parcel
     public function setServiceList(?Collection $serviceList): self
     {
         $this->serviceList = $serviceList;
+
+        return $this;
+    }
+
+    public function getService(string $code): ?Service
+    {
+        return $this->serviceList->get($code);
+    }
+
+    public function addService(Service $service): self
+    {
+        $this->serviceList->set($service->getCode(), $service);
 
         return $this;
     }

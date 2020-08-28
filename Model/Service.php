@@ -7,6 +7,39 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Service
 {
+    public static $codes = [
+        '24H',
+        'ADR',
+        'AOS',
+        //'COD', // COD is already used in the Parcel model
+        'CS1',
+        'DAW',
+        'DDS',
+        'DPV',
+        'FDS',
+        'FSS',
+        'INS',
+        'LDS',
+        'MCC',
+        'MMP',
+        'PCC',
+        'PRS',
+        'PSD',
+        'PSS',
+        'SAT',
+        'SBS',
+        'SDS',
+        'SM1',
+        'SM2',
+        'SRS',
+        'SZL',
+        'T09',
+        'T10',
+        'T12',
+        'TGS',
+        'XS',
+    ];
+
     use SoapObjectTrait;
 
     /**
@@ -24,6 +57,11 @@ class Service
      * @var string
      */
     protected $value;
+
+    public function __construct(?string $code = null)
+    {
+        $this->setCode($code);
+    }
 
     public function toArray(): array
     {

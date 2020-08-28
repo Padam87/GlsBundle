@@ -14,7 +14,7 @@ trait SoapObjectTrait
             $value = $this->$method();
 
             if ($value instanceof Collection) {
-                return $value->toArray();
+                return array_values($value->toArray());
             }
 
             if ($value instanceof \DateTime) {
