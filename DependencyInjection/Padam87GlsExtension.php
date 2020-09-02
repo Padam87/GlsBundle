@@ -3,6 +3,7 @@
 namespace Padam87\GlsBundle\DependencyInjection;
 
 use Padam87\GlsBundle\Service\ParcelApi;
+use Padam87\GlsBundle\Service\ParcelGeneratorInterface;
 use Padam87\GlsBundle\Service\PodDownloadApi;
 use Padam87\GlsBundle\Service\TrackingApi;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -36,5 +37,7 @@ class Padam87GlsExtension extends Extension
 
         $definition = $container->getDefinition(PodDownloadApi::class);
         $definition->addMethodCall('setConfig', [$config]);
+
+        $container->registerForAutoconfiguration(ParcelGeneratorInterface::class)->addTag('padam87_gls.parcel_genarator');
     }
 }
