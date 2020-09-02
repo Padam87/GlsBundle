@@ -14,8 +14,10 @@ trait ParcelListTrait
 
     public function __construct($parcelList = [])
     {
-        if (is_iterable($parcelList)) {
-            $this->parcelList = new Collection((array) $parcelList);
+        if (is_array($parcelList)) {
+            $this->parcelList = new Collection($parcelList);
+        } elseif ($parcelList instanceof \Traversable) {
+            $this->parcelList = new Collection(iterator_to_array($parcelList));
         } elseif ($parcelList instanceof Parcel) {
             $this->parcelList = new Collection([$parcelList]);
         } else {
