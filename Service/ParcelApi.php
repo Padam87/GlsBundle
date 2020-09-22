@@ -114,6 +114,8 @@ class ParcelApi
 
         $request->getParcelList()->forAll(function ($key, Parcel $parcel) {
             $parcel->setClientNumber($this->config['config']['senderid']);
+
+            return true;
         });
 
         $response = $this->getClient()->PrintLabels(['printLabelsRequest' => $request]);
