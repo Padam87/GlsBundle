@@ -28,7 +28,9 @@ class ServiceType extends AbstractType
             )
         ;
 
-        $builder->addEventListener(FormEvents::POST_SET_DATA, [$this, 'codeListener']);
+        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+            $this->codeListener($event);
+        });
     }
 
     public function codeListener(FormEvent $event)

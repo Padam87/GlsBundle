@@ -9,15 +9,9 @@ abstract class AbstractRequest
 {
     use SoapObjectTrait;
 
-    /**
-     * @var string
-     */
-    protected $username;
+    protected ?string $username = null;
 
-    /**
-     * @var string
-     */
-    protected $password;
+    protected ?string $password = null;
 
     public function getUsername(): ?string
     {

@@ -12,30 +12,27 @@ class Parcel
     /**
      * Unique client number provided by GLS company.
      *
-     * @var integer
      *
      * @Assert\NotBlank(groups={"BeforeSubmit"})
      */
-    public $clientNumber;
+    public ?int $clientNumber = null;
 
     /**
      * Client custom tag identifying parcel.
      *
-     * @var string
      *
      * @Assert\NotBlank(groups={"Recommended"})
      */
-    public $clientReference;
+    public ?string $clientReference = null;
 
     /**
      * Count of parcels sent in one shipment.
      *
-     * @var integer
      *
      * @Assert\NotBlank()
      * @Assert\Range(min="1")
      */
-    public $count = 1;
+    public int $count = 1;
 
     /**
      * Cash on delivery amount.
@@ -46,49 +43,39 @@ class Parcel
 
     /**
      * Cash on delivery client reference number used for payment pairing.
-     *
-     * @var string
      */
-    public $codReference;
+    public ?string $codReference = null;
 
     /**
      * Parcel info printed on label.
      *
-     * @var string
      *
      * @Assert\NotBlank(groups={"Recommended"})
      */
-    public $content;
+    public ?string $content = null;
 
     /**
      * Pick up date. DEFAULT actual date.
-     *
-     * @var \DateTime
      */
-    public $pickupDate;
+    public ?\DateTime $pickupDate = null;
 
     /**
      * The address of place where courier pick up the shipment.
      *
-     * @var Address
      *
      * @Assert\NotBlank()
      */
-    public $pickupAddress;
+    public ?Address $pickupAddress = null;
 
     /**
      * The address of place where courier pick up the shipment.
      *
-     * @var Address
      *
      * @Assert\NotBlank()
      */
-    public $deliveryAddress;
+    public ?Address $deliveryAddress = null;
 
-    /**
-     * @var Collection
-     */
-    public $serviceList;
+    public ?Collection $serviceList = null;
 
     public function __construct()
     {

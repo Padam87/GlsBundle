@@ -4,15 +4,9 @@ namespace Padam87\GlsBundle\Dto\Request;
 
 class GetParcelStatusesRequest extends AbstractRequest
 {
-    /**
-     * @var int
-     */
-    private $parcelNumber;
+    private int $parcelNumber;
 
-    /**
-     * @var bool
-     */
-    private $returnPOD = true;
+    private bool $returnPOD = true;
 
     public function getParcelNumber(): int
     {

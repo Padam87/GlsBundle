@@ -12,83 +12,74 @@ class Address
     /**
      * Name of the person or organization.
      *
-     * @var string
      *
      * @Assert\NotBlank()
      */
-    protected $name;
+    protected ?string $name = null;
 
     /**
      * Name of the street.
      *
-     * @var string
      *
      * @Assert\NotBlank()
      */
-    protected $street;
+    protected ?string $street = null;
 
     /**
      * Number of the house.
      *
-     * @var string
      *
      * @Assert\NotBlank(groups={"Recommended"})
      */
-    protected $houseNumber;
+    protected ?string $houseNumber = null;
 
     /**
      * Name of the town or village.
      *
-     * @var string
      *
      * @Assert\NotBlank()
      */
-    protected $city;
+    protected ?string $city = null;
 
     /**
      * Area Zip code.
      *
-     * @var string
      *
      * @Assert\NotBlank()
      */
-    protected $zipCode;
+    protected ?string $zipCode = null;
 
     /**
      * Two letter country code defined in ISO 3166-1.
      *
-     * @var string
      *
      * @Assert\NotBlank(groups={"Recommended"})
      */
-    protected $countryIsoCode;
+    protected ?string $countryIsoCode = null;
 
     /**
      * Name of person which can be asked or inform about shipment details by GLS.
      *
-     * @var string
      *
      * @Assert\NotBlank(groups={"Recommended"})
      */
-    protected $contactName;
+    protected ?string $contactName = null;
 
     /**
      * Phone number of person which can be asked or inform about shipment details by GLS.
      *
-     * @var string
      *
      * @Assert\NotBlank(groups={"Recommended"})
      */
-    protected $contactPhone;
+    protected ?string $contactPhone = null;
 
     /**
      * Email address of person which can be asked or inform about shipment details by GLS.
      *
-     * @var string
      *
      * @Assert\NotBlank(groups={"Recommended"})
      */
-    protected $contactEmail;
+    protected ?string $contactEmail = null;
 
     public function toArray(): array
     {

@@ -4,15 +4,9 @@ namespace Padam87\GlsBundle\Dto\Request;
 
 trait PrintTrait
 {
-    /**
-     * @var int
-     */
-    protected $printPosition = 1;
+    protected int $printPosition = 1;
 
-    /**
-     * @var int
-     */
-    protected $showPrintDialog = 0;
+    protected int $showPrintDialog = 0;
 
     public function getPrintPosition(): ?int
     {

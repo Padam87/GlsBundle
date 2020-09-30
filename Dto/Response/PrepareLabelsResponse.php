@@ -6,15 +6,9 @@ use Padam87\GlsBundle\Model\Collection;
 
 class PrepareLabelsResponse extends AbstractResponse
 {
-    /**
-     * @var Collection
-     */
-    protected $parcelInfoList;
+    protected ?Collection $parcelInfoList = null;
 
-    /**
-     * @var Collection
-     */
-    protected $prepareLabelsError;
+    protected ?Collection $prepareLabelsError = null;
 
     public function getParcelInfoList(): ?Collection
     {

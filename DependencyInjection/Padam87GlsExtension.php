@@ -2,6 +2,7 @@
 
 namespace Padam87\GlsBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Padam87\GlsBundle\Service\ParcelApi;
 use Padam87\GlsBundle\Service\ParcelGeneratorInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -24,7 +25,7 @@ class Padam87GlsExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
 
         $definition = $container->getDefinition(ParcelApi::class);

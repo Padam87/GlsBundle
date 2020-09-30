@@ -8,15 +8,9 @@ class ParcelInfo
 {
     use SoapObjectTrait;
 
-    /**
-     * @var string
-     */
-    protected $clientReference;
+    protected ?string $clientReference = null;
 
-    /**
-     * @var int
-     */
-    protected $parcelId;
+    protected ?int $parcelId = null;
 
     public function getClientReference(): ?string
     {

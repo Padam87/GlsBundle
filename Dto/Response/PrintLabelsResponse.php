@@ -6,20 +6,11 @@ use Padam87\GlsBundle\Model\Collection;
 
 class PrintLabelsResponse extends AbstractResponse
 {
-    /**
-     * @var string
-     */
-    protected $labels;
+    protected ?string $labels = null;
 
-    /**
-     * @var Collection
-     */
-    protected $printLabelsErrorList;
+    protected ?Collection $printLabelsErrorList = null;
 
-    /**
-     * @var Collection
-     */
-    protected $printLabelsInfoList;
+    protected ?Collection $printLabelsInfoList = null;
 
     public function getLabels(): ?string
     {

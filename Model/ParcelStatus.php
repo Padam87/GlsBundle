@@ -8,35 +8,17 @@ class ParcelStatus
 {
     use SoapObjectTrait;
 
-    /**
-     * @var string
-     */
-    private $depotCity;
+    private string $depotCity;
 
-    /**
-     * @var string
-     */
-    private $depotNumber;
+    private string $depotNumber;
 
-    /**
-     * @var string
-     */
-    private $statusCode;
+    private string $statusCode;
 
-    /**
-     * @var \DateTime
-     */
-    private $statusDate;
+    private \DateTime $statusDate;
 
-    /**
-     * @var ?string
-     */
-    private $statusDescription;
+    private ?string $statusDescription = null;
 
-    /**
-     * @var ?string
-     */
-    private $statusInfo;
+    private ?string $statusInfo = null;
 
     public function getDepotCity(): string
     {

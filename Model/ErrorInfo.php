@@ -8,25 +8,13 @@ class ErrorInfo
 {
     use SoapObjectTrait;
 
-    /**
-     * @var int
-     */
-    protected $errorCode;
+    protected ?int $errorCode = null;
 
-    /**
-     * @var string
-     */
-    protected $errorDescription;
+    protected ?string $errorDescription = null;
 
-    /**
-     * @var Collection
-     */
-    protected $clientReferenceList;
+    protected ?Collection $clientReferenceList = null;
 
-    /**
-     * @var Collection
-     */
-    protected $parcelIdList;
+    protected ?Collection $parcelIdList = null;
 
     public function getErrorCode(): ?int
     {

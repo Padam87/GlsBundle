@@ -25,8 +25,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ParcelApi
 {
-    private $config = [];
-    private $client;
+    private array $config = [];
+    private ?\SoapClient $client = null;
 
     public function setConfig(array $config)
     {

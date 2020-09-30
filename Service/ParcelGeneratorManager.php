@@ -4,10 +4,7 @@ namespace Padam87\GlsBundle\Service;
 
 class ParcelGeneratorManager
 {
-    /**
-     * @var iterable|ParcelGeneratorInterface[]
-     */
-    private $generators;
+    private iterable $generators;
 
     public function __construct(iterable $generators)
     {

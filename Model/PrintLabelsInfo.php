@@ -4,10 +4,7 @@ namespace Padam87\GlsBundle\Model;
 
 class PrintLabelsInfo extends ParcelInfo
 {
-    /**
-     * @var int
-     */
-    protected $parcelNumber;
+    protected ?int $parcelNumber = null;
 
     public function getParcelNumber(): ?int
     {

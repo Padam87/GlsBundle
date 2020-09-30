@@ -9,10 +9,7 @@ class GetPrintedLabelsRequest extends AbstractRequest
 {
     use PrintTrait;
 
-    /**
-     * @var Collection
-     */
-    protected $parcelIdList;
+    protected ?Collection $parcelIdList = null;
 
     public function __construct(array $parcelList = [])
     {

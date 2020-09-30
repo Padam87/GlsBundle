@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Service
 {
-    public static $codes = [
+    public static array $codes = [
         '24H',
         'ADR',
         'AOS',
@@ -45,18 +45,15 @@ class Service
     /**
      * Service code (see Appendix B: List of services).
      *
-     * @var string
      *
      * @Assert\NotBlank()
      */
-    protected $code;
+    protected ?string $code = null;
 
     /**
      * Service value without previous special service settings
-     *
-     * @var string
      */
-    protected $value;
+    protected ?string $value = null;
 
     public function __construct(?string $code = null)
     {

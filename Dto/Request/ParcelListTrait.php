@@ -7,17 +7,14 @@ use Padam87\GlsBundle\Model\Parcel;
 
 trait ParcelListTrait
 {
-    /**
-     * @var Collection
-     */
-    protected $parcelList;
+    protected ?Collection $parcelList = null;
 
     public function __construct($parcelList = [])
     {
         if (is_array($parcelList)) {
             $this->parcelList = new Collection($parcelList);
         } elseif ($parcelList instanceof \Traversable) {
-            $this->parcelList = new Collection(iterator_to_array($parcelList));
+            $this->parcelList = new Collection([...$parcelList]);
         } elseif ($parcelList instanceof Parcel) {
             $this->parcelList = new Collection([$parcelList]);
         } else {
