@@ -63,7 +63,7 @@ class ParcelApi
                         'ParcelStatus' => ParcelStatus::class,
                         'PrintLabelsInfo' => PrintLabelsInfo::class,
 
-                        'PrintLabelsRequest' => PrintLabelsRequest::class,
+                        //'PrintLabelsRequest' => PrintLabelsRequest::class,
                         'PrintLabelsResponse' => PrintLabelsResponse::class,
 
                         'PrepareLabelsRequest' => PrepareLabelsRequest::class,
