@@ -54,7 +54,7 @@ class ParcelApi
                         'ArrayOfPrintLabelsInfo' => Collection::class,
                         'ArrayOfParcelStatus' => Collection::class,
 
-                        'Address' => Address::class,
+                        //'Address' => Address::class,
                         'Parcel' => Parcel::class,
                         'Service' => Service::class,
 
