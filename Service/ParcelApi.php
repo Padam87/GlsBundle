@@ -56,7 +56,7 @@ class ParcelApi
 
                         //'Address' => Address::class,
                         'Parcel' => Parcel::class,
-                        'Service' => Service::class,
+                        //'Service' => Service::class,
 
                         'ErrorInfo' => ErrorInfo::class,
                         'ParcelInfo' => ParcelInfo::class,

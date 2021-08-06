@@ -2,7 +2,6 @@
 
 namespace Padam87\GlsBundle\Model;
 
-use Padam87\GlsBundle\Soap\SoapObjectTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class Service
@@ -40,7 +39,23 @@ class Service
         'XS',
     ];
 
-    use SoapObjectTrait;
+    public function __isset($name)
+    {
+        return in_array($name, ['Code', $this->getCode() . 'Parameter']);
+    }
+
+    public function __get($name)
+    {
+        if ($name === 'Code') {
+            return $this->getCode();
+        }
+
+        if ($name === $this->getCode() . 'Parameter') {
+            return $this->getParameter();
+        }
+
+        return null;
+    }
 
     /**
      * Service code (see Appendix B: List of services).
@@ -50,22 +65,11 @@ class Service
      */
     protected ?string $code = null;
 
-    /**
-     * Service value without previous special service settings
-     */
-    protected ?string $value = null;
+    protected array $parameter = [];
 
     public function __construct(?string $code = null)
     {
         $this->setCode($code);
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'Code' => $this->getName(),
-            'Value' => $this->getValue(),
-        ];
     }
 
     public function getCode(): ?string
@@ -80,14 +84,14 @@ class Service
         return $this;
     }
 
-    public function getValue(): ?string
+    public function getParameter(): array
     {
-        return $this->value;
+        return $this->parameter;
     }
 
-    public function setValue(?string $value): self
+    public function setParameter(array $parameter): self
     {
-        $this->value = $value;
+        $this->parameter = $parameter;
 
         return $this;
     }

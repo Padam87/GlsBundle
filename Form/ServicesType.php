@@ -6,11 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Padam87\GlsBundle\Model\Collection;
 use Padam87\GlsBundle\Model\Service;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ServicesType extends AbstractType implements DataTransformerInterface
@@ -32,7 +29,7 @@ class ServicesType extends AbstractType implements DataTransformerInterface
 
             $form
                 ->add('enabled', CheckboxType::class, ['required' => false, 'label' => 'gls.service.enabled'])
-                ->add('service', ServiceType::class)
+                ->add('service', ServiceType::class, ['code' => $service])
             ;
 
             $builder->add($form);

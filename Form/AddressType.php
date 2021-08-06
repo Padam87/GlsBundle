@@ -2,7 +2,6 @@
 
 namespace Padam87\GlsBundle\Form;
 
-use Doctrine\DBAL\Types\IntegerType;
 use Padam87\GlsBundle\Model\Address;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
