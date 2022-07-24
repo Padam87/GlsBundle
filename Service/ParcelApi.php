@@ -2,6 +2,7 @@
 
 namespace Padam87\GlsBundle\Service;
 
+use Padam87\GlsBundle\Dto\Message\PrintLabels;
 use Padam87\GlsBundle\Dto\Request\AbstractRequest;
 use Padam87\GlsBundle\Dto\Request\GetParcelStatusesRequest;
 use Padam87\GlsBundle\Dto\Request\GetPrintedLabelsRequest;
@@ -54,6 +55,8 @@ class ParcelApi
                         'ArrayOfPrintLabelsInfo' => Collection::class,
                         'ArrayOfParcelStatus' => Collection::class,
 
+                        // Commented lines because SOAP sets the wrong namespace for some reason.
+
                         //'Address' => Address::class,
                         'Parcel' => Parcel::class,
                         //'Service' => Service::class,
@@ -66,13 +69,13 @@ class ParcelApi
                         //'PrintLabelsRequest' => PrintLabelsRequest::class,
                         'PrintLabelsResponse' => PrintLabelsResponse::class,
 
-                        'PrepareLabelsRequest' => PrepareLabelsRequest::class,
+                        //'PrepareLabelsRequest' => PrepareLabelsRequest::class,
                         'PrepareLabelsResponse' => PrepareLabelsResponse::class,
 
-                        'GetPrintedLabelsRequest' => GetPrintedLabelsRequest::class,
+                        //'GetPrintedLabelsRequest' => GetPrintedLabelsRequest::class,
                         'GetPrintedLabelsResponse' => GetPrintedLabelsResponse::class,
 
-                        'GetParcelStatusesRequest' => GetParcelStatusesRequest::class,
+                        //'GetParcelStatusesRequest' => GetParcelStatusesRequest::class,
                         'GetParcelStatusResponse' => GetParcelStatusesResponse::class,
                     ]
                 ]

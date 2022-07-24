@@ -6,11 +6,11 @@ use Padam87\GlsBundle\Model\Collection;
 
 class GetParcelStatusesResponse extends AbstractResponse
 {
-    protected string $clientReference;
+    protected ?string $clientReference;
 
-    protected string $deliveryCountryCode;
+    protected ?string $deliveryCountryCode;
 
-    protected string $deliveryZipCode;
+    protected ?string $deliveryZipCode;
 
     protected Collection $getParcelStatusErrors;
 
@@ -27,7 +27,7 @@ class GetParcelStatusesResponse extends AbstractResponse
         return $this->clientReference;
     }
 
-    public function setClientReference(string $clientReference): GetParcelStatusesResponse
+    public function setClientReference(?string $clientReference): GetParcelStatusesResponse
     {
         $this->clientReference = $clientReference;
 
@@ -39,7 +39,7 @@ class GetParcelStatusesResponse extends AbstractResponse
         return $this->deliveryCountryCode;
     }
 
-    public function setDeliveryCountryCode(string $deliveryCountryCode): GetParcelStatusesResponse
+    public function setDeliveryCountryCode(?string $deliveryCountryCode): GetParcelStatusesResponse
     {
         $this->deliveryCountryCode = $deliveryCountryCode;
 
@@ -51,7 +51,7 @@ class GetParcelStatusesResponse extends AbstractResponse
         return $this->deliveryZipCode;
     }
 
-    public function setDeliveryZipCode(string $deliveryZipCode): GetParcelStatusesResponse
+    public function setDeliveryZipCode(?string $deliveryZipCode): GetParcelStatusesResponse
     {
         $this->deliveryZipCode = $deliveryZipCode;
 

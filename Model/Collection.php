@@ -2,9 +2,7 @@
 
 namespace Padam87\GlsBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
-class Collection extends ArrayCollection
+class Collection extends CopyOfArrayCollection
 {
     public function __get($name)
     {

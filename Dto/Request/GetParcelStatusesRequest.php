@@ -4,9 +4,23 @@ namespace Padam87\GlsBundle\Dto\Request;
 
 class GetParcelStatusesRequest extends AbstractRequest
 {
+    private string $languageIsoCode = 'hu';
+
     private int $parcelNumber;
 
     private bool $returnPOD = true;
+
+    public function getLanguageIsoCode(): string
+    {
+        return $this->languageIsoCode;
+    }
+
+    public function setLanguageIsoCode(string $languageIsoCode): self
+    {
+        $this->languageIsoCode = $languageIsoCode;
+
+        return $this;
+    }
 
     public function getParcelNumber(): int
     {
