@@ -6,11 +6,11 @@ use Padam87\GlsBundle\Model\Collection;
 
 class GetParcelStatusesResponse extends AbstractResponse
 {
-    protected ?string $clientReference;
+    protected ?string $clientReference = null;
 
-    protected ?string $deliveryCountryCode;
+    protected ?string $deliveryCountryCode = null;
 
-    protected ?string $deliveryZipCode;
+    protected ?string $deliveryZipCode = null;
 
     protected Collection $getParcelStatusErrors;
 

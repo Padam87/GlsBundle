@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ServiceParameterType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         switch ($options['code']) {
             case 'DDS':
@@ -41,7 +41,7 @@ class ServiceParameterType extends AbstractType
                             function ($value) {
                                 return $value;
                             },
-                            function ($value) {
+                            function (array $value): array {
                                 if ($value['TimeFrom'] instanceof \DateTimeInterface) {
                                     $value['TimeFrom'] = $value['TimeFrom']->format('c');
                                 }
@@ -68,7 +68,7 @@ class ServiceParameterType extends AbstractType
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setRequired('code')

@@ -6,7 +6,7 @@ use Padam87\GlsBundle\Model\Collection;
 
 trait SoapObjectTrait
 {
-    public function __get($name)
+    public function __get(string $name)
     {
         $method = 'get' . $name;
 
@@ -27,7 +27,7 @@ trait SoapObjectTrait
         return null;
     }
 
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         $method = 'set' . $name;
 

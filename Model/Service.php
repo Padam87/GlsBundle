@@ -60,9 +60,8 @@ class Service
     /**
      * Service code (see Appendix B: List of services).
      *
-     *
-     * @Assert\NotBlank()
      */
+    #[Assert\NotBlank]
     protected ?string $code = null;
 
     protected array $parameter = [];

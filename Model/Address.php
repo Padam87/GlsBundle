@@ -12,73 +12,64 @@ class Address
     /**
      * Name of the person or organization.
      *
-     *
-     * @Assert\NotBlank()
      */
+    #[Assert\NotBlank]
     protected ?string $name = null;
 
     /**
      * Name of the street.
      *
-     *
-     * @Assert\NotBlank()
      */
+    #[Assert\NotBlank]
     protected ?string $street = null;
 
     /**
      * Number of the house.
      *
-     *
-     * @Assert\NotBlank(groups={"Recommended"})
      */
+    #[Assert\NotBlank(groups: ['Recommended'])]
     protected ?string $houseNumber = null;
 
     /**
      * Name of the town or village.
      *
-     *
-     * @Assert\NotBlank()
      */
+    #[Assert\NotBlank]
     protected ?string $city = null;
 
     /**
      * Area Zip code.
      *
-     *
-     * @Assert\NotBlank()
      */
+    #[Assert\NotBlank]
     protected ?string $zipCode = null;
 
     /**
      * Two letter country code defined in ISO 3166-1.
      *
-     *
-     * @Assert\NotBlank(groups={"Recommended"})
      */
+    #[Assert\NotBlank(groups: ['Recommended'])]
     protected ?string $countryIsoCode = null;
 
     /**
      * Name of person which can be asked or inform about shipment details by GLS.
      *
-     *
-     * @Assert\NotBlank(groups={"Recommended"})
      */
+    #[Assert\NotBlank(groups: ['Recommended'])]
     protected ?string $contactName = null;
 
     /**
      * Phone number of person which can be asked or inform about shipment details by GLS.
      *
-     *
-     * @Assert\NotBlank(groups={"Recommended"})
      */
+    #[Assert\NotBlank(groups: ['Recommended'])]
     protected ?string $contactPhone = null;
 
     /**
      * Email address of person which can be asked or inform about shipment details by GLS.
      *
-     *
-     * @Assert\NotBlank(groups={"Recommended"})
      */
+    #[Assert\NotBlank(groups: ['Recommended'])]
     protected ?string $contactEmail = null;
 
     public function toArray(): array

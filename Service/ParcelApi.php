@@ -29,12 +29,12 @@ class ParcelApi
     private array $config = [];
     private ?\SoapClient $client = null;
 
-    public function setConfig(array $config)
+    public function setConfig(array $config): void
     {
         $this->config = $config;
     }
 
-    public function getClient()
+    public function getClient(): \SoapClient
     {
         if ($this->client === null) {
             $this->client = new \SoapClient(
@@ -89,7 +89,7 @@ class ParcelApi
     {
         $request
             ->setUsername($this->config['config']['username'])
-            ->setPassword(hash('sha512', $this->config['config']['password'], true))
+            ->setPassword(hash('sha512', (string) $this->config['config']['password'], true))
         ;
     }
 
@@ -97,7 +97,7 @@ class ParcelApi
     {
         $this->prepareRequest($request);
 
-        $request->getParcelList()->forAll(function ($key, Parcel $parcel) {
+        $request->getParcelList()->forAll(function ($key, Parcel $parcel): void {
             $parcel->setClientNumber($this->config['config']['senderid']);
         });
 
@@ -119,7 +119,7 @@ class ParcelApi
     {
         $this->prepareRequest($request);
 
-        $request->getParcelList()->forAll(function ($key, Parcel $parcel) {
+        $request->getParcelList()->forAll(function ($key, Parcel $parcel): bool {
             $parcel->setClientNumber($this->config['config']['senderid']);
 
             return true;

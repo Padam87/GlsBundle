@@ -12,26 +12,23 @@ class Parcel
     /**
      * Unique client number provided by GLS company.
      *
-     *
-     * @Assert\NotBlank(groups={"BeforeSubmit"})
      */
+    #[Assert\NotBlank(groups: ['BeforeSubmit'])]
     public ?int $clientNumber = null;
 
     /**
      * Client custom tag identifying parcel.
      *
-     *
-     * @Assert\NotBlank(groups={"Recommended"})
      */
+    #[Assert\NotBlank(groups: ['Recommended'])]
     public ?string $clientReference = null;
 
     /**
      * Count of parcels sent in one shipment.
      *
-     *
-     * @Assert\NotBlank()
-     * @Assert\Range(min="1")
      */
+    #[Assert\NotBlank]
+    #[Assert\Range(min: '1')]
     public int $count = 1;
 
     /**
@@ -49,9 +46,8 @@ class Parcel
     /**
      * Parcel info printed on label.
      *
-     *
-     * @Assert\NotBlank(groups={"Recommended"})
      */
+    #[Assert\NotBlank(groups: ['Recommended'])]
     public ?string $content = null;
 
     /**
@@ -62,17 +58,15 @@ class Parcel
     /**
      * The address of place where courier pick up the shipment.
      *
-     *
-     * @Assert\NotBlank()
      */
+    #[Assert\NotBlank]
     public ?Address $pickupAddress = null;
 
     /**
      * The address of place where courier pick up the shipment.
      *
-     *
-     * @Assert\NotBlank()
      */
+    #[Assert\NotBlank]
     public ?Address $deliveryAddress = null;
 
     public ?Collection $serviceList = null;
@@ -105,7 +99,7 @@ class Parcel
         ]);
     }
 
-    public function unserialize($serialized)
+    public function unserialize($serialized): never
     {
         throw new \LogicException('Not implemented - will fix if a valid use case emerges.');
     }
@@ -151,7 +145,7 @@ class Parcel
         return $this->codAmount;
     }
 
-    public function setCodAmount($codAmount)
+    public function setCodAmount($codAmount): static
     {
         $this->codAmount = $codAmount;
 

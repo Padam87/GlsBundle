@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class ServicesType extends AbstractType implements DataTransformerInterface
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer($this);
 
@@ -36,7 +36,7 @@ class ServicesType extends AbstractType implements DataTransformerInterface
         }
     }
 
-    public function transform($value)
+    public function transform($value): mixed
     {
         /** @var Collection $services */
         $services = $value;
@@ -56,7 +56,7 @@ class ServicesType extends AbstractType implements DataTransformerInterface
         return $data;
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform($value): mixed
     {
         /** @var Collection $services */
         $services = $value;
