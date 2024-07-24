@@ -34,8 +34,8 @@ class ServiceParameterType extends AbstractType
                 break;
             case 'SDS':
                 $builder
-                    ->add('TimeFrom', TimeType::class)
-                    ->add('TimeTo', TimeType::class)
+                    ->add('TimeFrom', TimeType::class, ['required' => false])
+                    ->add('TimeTo', TimeType::class, ['required' => false])
                     ->addModelTransformer(
                         new CallbackTransformer(
                             function ($value) {
