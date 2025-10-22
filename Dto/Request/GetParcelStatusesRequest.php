@@ -6,7 +6,7 @@ class GetParcelStatusesRequest extends AbstractRequest
 {
     private string $languageIsoCode = 'hu';
 
-    private int $parcelNumber;
+    private int|string $parcelNumber;
 
     private bool $returnPOD = true;
 
@@ -22,12 +22,12 @@ class GetParcelStatusesRequest extends AbstractRequest
         return $this;
     }
 
-    public function getParcelNumber(): int
+    public function getParcelNumber(): int|string
     {
         return $this->parcelNumber;
     }
 
-    public function setParcelNumber(int $parcelNumber): GetParcelStatusesRequest
+    public function setParcelNumber(int|string $parcelNumber): GetParcelStatusesRequest
     {
         $this->parcelNumber = $parcelNumber;
 
