@@ -25,10 +25,5 @@
     "symfony/validator": "^6.0 || ^7.0 || ^8.0",
     "doctrine/common": "^2.0 || ^3.0",
     "doctrine/collections": "^2.1"
-  },
-  "suggest": {
-  },
-  "require-dev": {
-    "rector/rector": "^0.8.13"
   }
 }

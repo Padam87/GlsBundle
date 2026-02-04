@@ -6,12 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class Collection extends ArrayCollection
 {
-    public function __get($name)
+    public function __get(string $name): mixed
     {
         return $this->toArray();
     }
 
-    public function __set($name, $value)
+    public function __set(string $name, mixed $value)
     {
         if (is_array($value)) {
             foreach ($value as $item) {

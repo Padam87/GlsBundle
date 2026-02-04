@@ -4,11 +4,8 @@ namespace Padam87\GlsBundle\Service;
 
 class ParcelGeneratorManager
 {
-    private iterable $generators;
-
-    public function __construct(iterable $generators)
+    public function __construct(private iterable $generators)
     {
-        $this->generators = $generators;
     }
 
     public function generate($data): \Generator

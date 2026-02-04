@@ -39,12 +39,12 @@ class Service
         'XS',
     ];
 
-    public function __isset($name)
+    public function __isset(string $name)
     {
         return in_array($name, ['Code', $this->getCode() . 'Parameter']);
     }
 
-    public function __get($name)
+    public function __get(string $name): mixed
     {
         if ($name === 'Code') {
             return $this->getCode();
